@@ -1,0 +1,11 @@
+@font-face {
+    font-family: Formula1;
+    src: url(../fonts/Formula1_Display-Bold.otf);
+    font-weight: bold;
+  }
+
+*{
+    font-family: "Formula1" ;
+
+
+}
