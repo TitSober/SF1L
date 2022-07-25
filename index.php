@@ -15,6 +15,7 @@ include('backend/db_connect.php')
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/font.css">
     <script src="js/bootstrap.js"></script>
+    <script src="https://kit.fontawesome.com/ef06bd2c19.js" crossorigin="anonymous"></script>
 
 
 
@@ -78,7 +79,7 @@ include('backend/db_connect.php')
           <a class="nav-link active me-3" href="#">O NAS</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled me-3" href="#" tabindex="-1" aria-disabled="true">ikonca</a>
+          <a class=" nav-link me-3 active" href="admin/login.php" ><i class="fas fa-user-alt" aria-hidden="true"></i></a>
         </li>
       </ul>
     </div>
