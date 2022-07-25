@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gostitelj: 127.0.0.1
--- Čas nastanka: 21. jul 2022 ob 20.52
+-- Čas nastanka: 25. jul 2022 ob 11.51
 -- Različica strežnika: 10.4.22-MariaDB
 -- Različica PHP: 7.4.27
 
@@ -20,6 +20,19 @@ SET time_zone = "+00:00";
 --
 -- Zbirka podatkov: `f1_database`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabele `admin`
+--
+
+CREATE TABLE `admin` (
+  `idadmin` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8_slovenian_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8_slovenian_ci NOT NULL,
+  `PASSWORD` varchar(512) COLLATE utf8_slovenian_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
 
 -- --------------------------------------------------------
 
@@ -224,6 +237,12 @@ CREATE TABLE `video_archive` (
 --
 
 --
+-- Indeksi tabele `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`idadmin`);
+
+--
 -- Indeksi tabele `driver`
 --
 ALTER TABLE `driver`
@@ -320,6 +339,12 @@ ALTER TABLE `video_archive`
 --
 -- AUTO_INCREMENT zavrženih tabel
 --
+
+--
+-- AUTO_INCREMENT tabele `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `idadmin` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT tabele `driver`
