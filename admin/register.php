@@ -87,15 +87,21 @@ include('../backend/db_connect.php')
 </nav>
 <!-- Main body of page other is static -->
 <div class="container  text-center me-6 ms-6">
-    <form action="../backend/login_admin.php" class="border border-dark rounded p-3" method="post">
+    <form action="../backend/register_admin.php" class="border border-dark rounded p-3" method="POST">
     <div class="row">
-        <div class="col"><h1 class="text-dark fb-bold">Login</h1></div>
+        <div class="col"><h1 class="text-dark fb-bold">Register</h1></div>
     </div>
     <div class="row">
         <div class="col"><label for="username">Username|Email</label></div>
     </div>
     <div class="row">
         <div class="col-3 m-auto"><input type="text" id="username" name="username" class="form-control"></div>
+    </div>
+    <div class="row">
+        <div class="col"><label for="username">Name</label></div>
+    </div>
+    <div class="row">
+        <div class="col-3 m-auto"><input type="text" id="name" name="name" class="form-control"></div>
     </div>
     <div class="row">
         <div class="col"><label for="password">Password</label></div>
