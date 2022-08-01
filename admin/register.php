@@ -1,6 +1,5 @@
-<<<<<<< HEAD
 <?php
-include('backend/db_connect.php')
+include('../backend/db_connect.php')
 
 ?>
 
@@ -13,11 +12,11 @@ include('backend/db_connect.php')
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/font.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/font.css">
     <script src="js/bootstrap.js"></script>
     <script src="https://kit.fontawesome.com/ef06bd2c19.js" crossorigin="anonymous"></script>
-
+    
 
 
     <title>F1</title>
@@ -86,9 +85,41 @@ include('backend/db_connect.php')
     </div>
   </div>
 </nav>
+<!-- Main body of page other is static -->
+<div class="container  text-center me-6 ms-6">
+    <form action="../backend/register_admin.php" class="border border-dark rounded p-3" method="POST">
+    <div class="row">
+        <div class="col"><h1 class="text-dark fb-bold">Register</h1></div>
+    </div>
+    <div class="row">
+        <div class="col"><label for="username">Username|Email</label></div>
+    </div>
+    <div class="row">
+        <div class="col-3 m-auto"><input type="text" id="username" name="username" class="form-control"></div>
+    </div>
+    <div class="row">
+        <div class="col"><label for="username">Name</label></div>
+    </div>
+    <div class="row">
+        <div class="col-3 m-auto"><input type="text" id="name" name="name" class="form-control"></div>
+    </div>
+    <div class="row">
+        <div class="col"><label for="password">Password</label></div>
+    </div>
+    <div class="row">
+        <div class="col-3 m-auto"><input type="password" name="password" id="password" class="form-control"></div>
+    </div>
+    <div class="row">
+        <div class="col"><button class="btn btn-primary" type="submit">SUBMIT</button></div>
+    </div>
+    </form>
+</div>
 
 
-<footer class="mt-auto py-3 footer bg-light">
+
+
+
+<footer id="footer" class="mt-auto py-3 footer bg-light">
     <div class="container">
         <div class="row">
             <div class="col">
@@ -109,3 +140,4 @@ include('backend/db_connect.php')
     
 </footer>
 </body>
+</html>

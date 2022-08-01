@@ -1,3 +1,4 @@
+
 <?php
 include('../backend/db_connect.php')
 
@@ -87,7 +88,7 @@ include('../backend/db_connect.php')
 </nav>
 <!-- Main body of page other is static -->
 <div class="container  text-center me-6 ms-6">
-    <form action="../backend/login-admin.php" class="border border-dark rounded p-3" method="post">
+    <form action="../backend/login_admin.php" class="border border-dark rounded p-3" method="post">
     <div class="row">
         <div class="col"><h1 class="text-dark fb-bold">Login</h1></div>
     </div>
@@ -134,4 +135,4 @@ include('../backend/db_connect.php')
     
 </footer>
 </body>
-</html>
+
