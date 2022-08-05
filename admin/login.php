@@ -15,7 +15,7 @@ include('../backend/db_connect.php')
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/font.css">
-    <script src="js/bootstrap.js"></script>
+    <script src="../js/bootstrap.js"></script>
     <script src="https://kit.fontawesome.com/ef06bd2c19.js" crossorigin="anonymous"></script>
     
 
@@ -80,7 +80,7 @@ include('../backend/db_connect.php')
           <a class="nav-link active me-3" href="#">O NAS</a>
         </li>
         <li class="nav-item">
-          <a class=" nav-link me-3 active" href="admin/login.php" ><i class="fas fa-user-alt" aria-hidden="true"></i></a>
+          <a class=" nav-link me-3 active" href="login.php" ><i class="fas fa-user-alt" aria-hidden="true"></i></a>
         </li>
       </ul>
     </div>

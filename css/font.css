@@ -3,9 +3,15 @@
     src: url(../fonts/Formula1_Display-Bold.otf);
     font-weight: bold;
   }
+  @font-face {
+    font-family: Formula1Light;
+    src: url(../fonts/Formula1-Display-Regular.otf);
+    font-weight: bold;
+  }
 
-*{
+body{
     font-family: "Formula1" ;
-
-
+}
+.drivers{
+  font-family: Formula1Light !important;
 }

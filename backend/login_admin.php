@@ -8,12 +8,12 @@ $sql = "SELECT * from admin where email = '$username';";
 $result = mysqli_query($conn, $sql);
 if($result){
     while($row = mysqli_fetch_assoc($result)){
-        if( password_verify($pass, $row['password'])){
+        if( password_verify($pass, $row['PASSWORD'])){
             session_start();
             $_SESSION['id'] = $row['idadmin'];
-            echo "you're in";
+            header("Location: ../admin/dashboard_admin.php");
         }else{
-            echo "wrong";
+            header("Location: ../admin/login.php?error=Wrong email or password");
         }
 
 
