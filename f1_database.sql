@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gostitelj: 127.0.0.1
--- Čas nastanka: 25. jul 2022 ob 11.51
+-- Čas nastanka: 05. avg 2022 ob 14.51
 -- Različica strežnika: 10.4.22-MariaDB
 -- Različica PHP: 7.4.27
 
@@ -34,6 +34,13 @@ CREATE TABLE `admin` (
   `PASSWORD` varchar(512) COLLATE utf8_slovenian_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
 
+--
+-- Odloži podatke za tabelo `admin`
+--
+
+INSERT INTO `admin` (`idadmin`, `name`, `email`, `PASSWORD`) VALUES
+(1, 'Tit', 'tit', '$2y$10$PW1F57qz3KCckOToPMBCn.qb/a.9Hl4zQwQEN3ntuyTgq9voApMii');
+
 -- --------------------------------------------------------
 
 --
@@ -45,7 +52,7 @@ CREATE TABLE `driver` (
   `ime` varchar(256) COLLATE utf8_slovenian_ci NOT NULL,
   `priimek` varchar(256) COLLATE utf8_slovenian_ci NOT NULL,
   `discord_username` varchar(256) COLLATE utf8_slovenian_ci NOT NULL,
-  `platform` enum('PlayStation','Steam','Xbox') COLLATE utf8_slovenian_ci NOT NULL,
+  `platform` enum('PlayStation','Steam','Xbox','Origin','Epic') COLLATE utf8_slovenian_ci DEFAULT NULL,
   `front_photo` varchar(256) COLLATE utf8_slovenian_ci NOT NULL,
   `left_profile_photo` varchar(256) COLLATE utf8_slovenian_ci NOT NULL,
   `right_profile_photo` varchar(256) COLLATE utf8_slovenian_ci NOT NULL,
@@ -54,11 +61,24 @@ CREATE TABLE `driver` (
   `game_tag` varchar(256) COLLATE utf8_slovenian_ci NOT NULL,
   `steam_friend_code` varchar(256) COLLATE utf8_slovenian_ci DEFAULT NULL,
   `driver_status` enum('stalni','rezervni') COLLATE utf8_slovenian_ci NOT NULL,
-  `assists` enum('gearbox','traction control','abs','racing line') COLLATE utf8_slovenian_ci NOT NULL,
   `date_of_birth` date NOT NULL,
-  `equipment` text COLLATE utf8_slovenian_ci NOT NULL,
-  `teams_idteams` int(11) DEFAULT NULL
+  `equipment` enum('Logitech','Thrustmaster','Fanatec','Kontroler','Tipkovnica') COLLATE utf8_slovenian_ci DEFAULT NULL,
+  `teams_idteams` int(11) DEFAULT NULL,
+  `driver_number` int(2) DEFAULT NULL,
+  `Gearbox` tinyint(1) DEFAULT 0,
+  `ABS` tinyint(1) DEFAULT 0,
+  `Traction_control` tinyint(1) DEFAULT 0,
+  `Racing_line` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
+
+--
+-- Odloži podatke za tabelo `driver`
+--
+
+INSERT INTO `driver` (`iddriver`, `ime`, `priimek`, `discord_username`, `platform`, `front_photo`, `left_profile_photo`, `right_profile_photo`, `winner_photo`, `LT_photo`, `game_tag`, `steam_friend_code`, `driver_status`, `date_of_birth`, `equipment`, `teams_idteams`, `driver_number`, `Gearbox`, `ABS`, `Traction_control`, `Racing_line`) VALUES
+(1, 'Tomaž', 'Stupar', 'Swoopy#9736', 'Steam', 'Ja', 'Je', 'Se strinjam', 'Sej da', 'Jup', 'Swoopy', 'sej je', 'stalni', '2003-05-29', 'Kontroler', 1, 69, 0, 0, 0, 0),
+(2, 'Tomaž', 'Stupar', 'Swoopy#9736', 'Steam', 'Ja', 'Je', 'Se strinjam', 'Sej da', 'Jup', 'Swoopy', 'sej je', 'stalni', '2003-05-29', '', 1, 69, 0, 0, 0, 0),
+(3, 'Nekdo', 'Sepišeja', 'penis#1111', 'Steam', 'fit-tracker.png', 'Posnetek-zaslona-2022-06-03-194222.png', 'nik.jpg', 'fu.jpg', 'backroom.jpg', 'Banana', '2562023', 'rezervni', '1999-06-30', 'Fanatec', 1, 7, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -220,6 +240,13 @@ CREATE TABLE `teams` (
   `secondary_color` varchar(256) COLLATE utf8_slovenian_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
 
+--
+-- Odloži podatke za tabelo `teams`
+--
+
+INSERT INTO `teams` (`idteams`, `name`, `logo`, `line`, `engine`, `primary_color`, `secondary_color`) VALUES
+(1, 'RedBull', 'Logo', 'Line', 'Da', 'Je', 'Mhm');
+
 -- --------------------------------------------------------
 
 --
@@ -344,13 +371,13 @@ ALTER TABLE `video_archive`
 -- AUTO_INCREMENT tabele `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `idadmin` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idadmin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT tabele `driver`
 --
 ALTER TABLE `driver`
-  MODIFY `iddriver` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `iddriver` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT tabele `pit_stops`
@@ -392,7 +419,7 @@ ALTER TABLE `sprint_race`
 -- AUTO_INCREMENT tabele `teams`
 --
 ALTER TABLE `teams`
-  MODIFY `idteams` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idteams` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT tabele `video_archive`
