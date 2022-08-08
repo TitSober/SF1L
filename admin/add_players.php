@@ -172,16 +172,16 @@ if(!empty($_SESSION['id'])){?>
         <hr class="bg-dark border-2 border-top border-dark">
         
         <div class="row">
-            <div class="col-4"><label class="col-form-label" for="gb">Gearbox</label></div>
-            <div class="col-2"><input type="checkbox" name="Gearbox" id="gb" value="Gearbox" class="form-check-input"></div>
-            <div class="col-4"><label class="col-form-label" for="tc">Traction control</label></div>
-            <div class="col-2"><input type="checkbox" name="Traction" id="tc" value="Traction control" class="form-check-input"></div>
+            <div class="col-4"><label class="col-form-label" for="Gearbox">Gearbox</label></div>
+            <div class="col-2"><input type="checkbox" name="Gearbox" id="gb" value="1" class="form-check-input"></div>
+            <div class="col-4"><label class="col-form-label" for="Traction">Traction control</label></div>
+            <div class="col-2"><input type="checkbox" name="Traction" id="tc" value="1" class="form-check-input"></div>
         </div>
         <div class="row">
             <div class="col-4"><label class="col-form-label" for="abs">ABS</label></div>
-            <div class="col-2"><input type="checkbox" name="ABS" id="abs" value="ABS" class="form-check-input"></div>
+            <div class="col-2"><input type="checkbox" name="ABS" id="abs" value="1" class="form-check-input"></div>
             <div class="col-4"><label class="col-form-label" for="rl">Racing Line</label></div>
-            <div class="col-2"><input type="checkbox" name="Racing" id="rl" value="Racing line" class="form-check-input"></div>
+            <div class="col-2"><input type="checkbox" name="Racing" id="rl" value="1" class="form-check-input"></div>
         </div>
     </div>
     <div class="container drivers">

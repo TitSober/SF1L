@@ -103,8 +103,8 @@ if(!empty($_SESSION['id']) && !empty($_GET['id'])){?>
             </div>
             <div class="col">
                 <div class="text-center p-4">
-                    <a href="#">Ikonca</a>
-                    <a href="#">Ikonca</a>
+                    <a href="#" class="text-reset fw-bold"><i class="fab fa-discord"></i>|</a>
+                    <a href="#" class="text-reset fw-bold"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
         </div>
