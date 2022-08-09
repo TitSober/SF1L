@@ -130,8 +130,8 @@ include('../backend/db_connect.php')
             <div class="col"><input type="file" name="zastava" class="form-control"></div>
         </div>
         <div class="row drivers ">
-            <div class="col"><label for="crta" class="col-form-label">Črtica</label></div>
-            <div class="col"><input type="file" name="crta" class="form-control"></div>
+            <div class="col"><label for="avto" class="col-form-label">Avto</label></div>
+            <div class="col"><input type="file" name="avto" class="form-control"></div>
         </div>
         <div class="row mb-3 mt-3">
             <div class="col-11"></div>

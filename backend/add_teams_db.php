@@ -1,6 +1,6 @@
 <?php
 include('db_connect.php');
-$files_names = ['logo','zastava','crta'];
+$files_names = ['logo','zastava','avto'];
 $files_uploaded = TRUE;
 for($i = 0; $i < count($files_names);$i++){
     $errors= array();
@@ -36,11 +36,11 @@ $prim = mysqli_real_escape_string($conn,$_POST['primarna']);
 $seco = mysqli_real_escape_string($conn,$_POST['sekundarna']);
 $logo = $_FILES['logo']['name'];
 $zastava = $_FILES['zastava']['name'];
-$crta = $_FILES['crta']['name'];
+$avto = $_FILES['avto']['name'];
 
 
 if($files_uploaded){
-    $sql = "INSERT INTO teams(name, logo, line, engine, primary_color, secondary_color, flag) VALUES('$name','$logo','$crta','motor','$prim','$seco','$zastava');";
+    $sql = "INSERT INTO teams(name, logo, car, engine, primary_color, secondary_color, flag) VALUES('$name','$logo','$avto','motor','$prim','$seco','$zastava');";
     if($result = mysqli_query($conn,$sql)){
         header("Location: ../admin/add_teams.php?message=Added a team!");
     }else{
