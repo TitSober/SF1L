@@ -93,55 +93,83 @@ include('../backend/db_connect.php')
   </div>
 </nav>
 <!-- Main body of page other is static -->
-<div class="container bg-light border">
+
+        
+<div class="container border bg-light">
     <form enctype="multipart/form-data" action="../backend/update_teams.php" method="post">
-        <?php
+    <?php
             $sql = "SELECT * FROM teams WHERE idteams=".$_GET['id'].";";
             $result = mysqli_query($conn,$sql);
             if($result){
                 while($row=mysqli_fetch_assoc($result)){
         
         ?>
-<!--
-        <div class="row mb-2">
-            <input type="hidden" name="id" value="<?php echo $row['idteams'];?>">
+    
+    <div class="container">
+        <div class="row mt-3">
             
-            <div class="col-5"></div>
-            <div class="col "><input class="form-control text-center" type="text" name="ime" value="<?php echo $row['name'];?>"></div>
-            <div class="col-5"></div>
+            <div class="col"><h3>DODAJ EKIPO</h3></div>
         </div>
-        <div class="row mb-2">
-            
-            <div class="col"><img src="../images/teams/logo/<?php echo $row['logo'];?>" alt="Logo ekipe" class="img-fluid" style="max-width: 50%;"><input type="file" name="logo" class="form-control mt-1"></div>
-            <div class="col"><img src="../images/teams/zastava/<?php echo $row['flag'];?>" alt="Logo ekipe" class="img-fluid" style="max-width: 50%;"> <input type="file" name="flag" class="form-control mt-1"></div>
+        <div class="row drivers">
+            <div class="col"><label for="ime" class="col-form-label">Ime ekipe</label></div>
+            <div class="col"><input type="text" name="ime" class="form-control" value="<?php echo $row['name'];?>"></div>
+            <input type="hidden" name="id" value="<?php echo $_GET['id'];?>">
+        </div>
+        <div class="row drivers">
+            <div class="col"><label for="motor" class="col-form-label">Motor</label></div>
+            <div class="col"><input type="text" name="motor" class="form-control" value="<?php echo $row['engine'];?>"></div>
+        </div>
+        <div class="row drivers">
+            <div class="col"><label for="primarna" class="col-form-label">Primarna</label></div>
+            <div class="col"><input type="text" name="primarna" class="form-control" value="<?php echo $row['primary_color'];?>"></div>
+        </div>
+        <div class="row drivers mb-5">
+            <div class="col"><label for="sekundarna" class="col-form-label">Sekundarna</label></div>
+            <div class="col"><input type="text" name="sekundarna" class="form-control" value="<?php echo $row['secondary_color'];?>"></div>
+        </div>
+    </div>
+    <div class="container">
+        <h5 class="text-secondary">Grafični elementi</h5>
+            <hr class="bg-dark border-2 border-top border-dark">
+        <div class="row drivers">
+            <div class="col"><label for="logo" class="col-form-label">Logotip</label></div>
+            <div class="col">
+              <img src="../images/teams/logo/<?php echo $row['logo']?>" alt="Logotip" class="img-fluid" style="max-width: 30%;">
+            </div>
             
         </div>
-        <div class="row mb-2">
-            <div class="col"><img src="../images/teams/avto/<?php echo $row['car'];?>" alt="Avto" class="img-fluid m-auto" style="max-width: 50%;"><input type="file" class="form-control" name="avto"></div>
+        <div class="row drivers"><div class="col"><div class="col"><input type="file" name="logo" class="form-control"></div></div></div>
+        <div class="row drivers">
+            <div class="col"><label for="zastava" class="col-form-label">Zastava</label></div>
+            <div class="col">
+              <img src="../images/teams/zastava/<?php echo $row['flag']?>" alt="Logotip" class="img-fluid" style="max-width: 30%;">
+            </div>
             
         </div>
-        <div class="row mb-2">
+        <div class="row drivers"><div class="col"><div class="col"><input type="file" name="zastava" class="form-control"></div></div></div>
+        <div class="row drivers ">
+            <div class="col"><label for="avto" class="col-form-label">Avto</label></div>
+            <div class="col">
+              <img src="../images/teams/avto/<?php echo $row['car']?>" alt="Logotip" class="img-fluid" style="max-width: 30%;">
+            </div>
             
-            <div class="col-5"></div>
-            <div class="col"><input type="text" name="motor" class="form-control text-center" value="<?php echo $row['engine'];?>"></div>
-            <div class="col-5"></div>
         </div>
-        <div class="row mb-2">
-            <div class="col"></div>
-            <div class="col"></div>
-        </div>-->
-
-        <table class="table">
-            <tbody>
-                <tr>
-                <input type="hidden" name="id" value="<?php echo $row['idteams'];?>">
-                </tr>
-            </tbody>
-        </table>
+        <div class="row drivers"><div class="col">
+          <div class="col"><input type="file" name="avto" class="form-control"></div>
+        </div></div>
+        <div class="row mb-3 mt-3">
+            <div class="col-11"></div>
+            <div class="col"><input type="submit" value="Potrdi" class="btn btn-primary"></div>
+        </div>
+        
+    </div>
 
 
-
+                 
     </form>
+
+
+
 </div>
 
 <?php
