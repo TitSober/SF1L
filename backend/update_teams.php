@@ -3,8 +3,8 @@ include('db_connect.php');
 
 
 class ErrorCode{
-    public static $flag;
-    public static $error_code;
+    public $flag;
+    public $error_code;
 
     function __construct($flag, $error_code){
         $this->flag = $flag;
@@ -28,7 +28,7 @@ function upload_files($files_names){
         $file_size =$_FILES[$files_names[$i]]['size'];
         $file_tmp =$_FILES[$files_names[$i]]['tmp_name'];
         $file_type=$_FILES[$files_names[$i]]['type'];
-        $file_ext=strtolower(end(explode('.',$_FILES[$files_names[$i]]['name'])));
+        $file_ext = strtolower(end(explode('.',$_FILES[$files_names[$i]]['name'])));
         
         $extensions= array("jpeg","jpg","png");
         
@@ -39,14 +39,13 @@ function upload_files($files_names){
             return new ErrorCode(FALSE,"File size too big");
         }
         
-        
-        
+     
         if(empty($errors)==true){
         move_uploaded_file($file_tmp,"../images/teams/".$files_names[$i]."/".$file_name);
         
         }else{
         
-        return new ErrorCode(FALSE,$errors)
+        return new ErrorCode(FALSE,$errors);
         }
     
     }
@@ -54,15 +53,12 @@ function upload_files($files_names){
 
 }
 
+echo "here";
 
-
-
-
-
-
-if(!empty($_FILES['logo']) && !empty($_FILES['avto']) && !empty($_FILES['zastava'])){
+if(file_exists($_FILES['logo']['tmp_name']) && file_exists($_FILES['avto']['tmp_name']) && file_exists($_FILES['zastava']['tmp_name'])){
     $files = array("logo", "zastava","avto");
-    if(upload_files($files)->get_flag()){
+    $flag = upload_files($files)->get_flag();
+    if($flag){
         $sql = "UPDATE teams SET name = '". $_POST['ime']."', engine = '".$_POST['motor']."', primary_color = '".$_POST['primarna']."', secondary_color = '".$_POST['sekundarna']."', logo = '".$_FILES['logo']['name']."', car = '".$_FILES['avto']['name']."', flag = '".$_FILES['zastava']['name']."' WHERE idteams = ".$_POST['id'].";";
         if($result = mysqli_query($conn, $sql)){
             header("Location: ../admin/team.php?id=".$_POST['id']."&updated=True");
@@ -70,9 +66,14 @@ if(!empty($_FILES['logo']) && !empty($_FILES['avto']) && !empty($_FILES['zastava
             header("Location: ../admin/team.php?id=".$_POST['id']."&updated=False");
         }
     
+    }else{
+        echo "prvi if failed 1";
+        echo $flag;
+        var_dump($_FILES);
+
     }
 
-}else if(!empty($_FILES['logo']) && !empty($_FILES['avto'])){
+}else if(file_exists($_FILES['logo']['tmp_name']) && file_exists($_FILES['avto']['tmp_name'])){
     $files = array("logo","avto");
     if(upload_files($files)->get_flag()){
         $sql = "UPDATE teams SET name = '". $_POST['ime']."', engine = '".$_POST['motor']."', primary_color = '".$_POST['primarna']."', secondary_color = '".$_POST['sekundarna']."', logo = '".$_FILES['logo']['name']."', car = '".$_FILES['avto']['name']."' WHERE idteams = ".$_POST['id'].";";
@@ -82,8 +83,11 @@ if(!empty($_FILES['logo']) && !empty($_FILES['avto']) && !empty($_FILES['zastava
             header("Location: ../admin/team.php?id=".$_POST['id']."&updated=False");
         }
     
+    }else{
+        echo "prvi if failed 2";
     }
-}else if(!empty($_FILES['logo']) && !empty($_FILES['zastava'])){
+
+}else if(file_exists($_FILES['logo']['tmp_name']) && file_exists($_FILES['zastava']['tmp_name'])){
     $files = array("logo","zastava");
     if(upload_files($files)->get_flag()){
         $sql = "UPDATE teams SET name = '". $_POST['ime']."', engine = '".$_POST['motor']."', primary_color = '".$_POST['primarna']."', secondary_color = '".$_POST['sekundarna']."', logo = '".$_FILES['logo']['name']."', flag = '".$_FILES['zastava']['name']."' WHERE idteams = ".$_POST['id'].";";
@@ -93,8 +97,11 @@ if(!empty($_FILES['logo']) && !empty($_FILES['avto']) && !empty($_FILES['zastava
             header("Location: ../admin/team.php?id=".$_POST['id']."&updated=False");
         }
     
+    }else{
+        echo "prvi if failed 3";
     }
-}else if(!empty($_FILES['avto']) && !empty($_FILES['zastava'])){
+
+}else if(file_exists($_FILES['avto']['tmp_name']) && file_exists($_FILES['zastava']['tmp_name'])){
     $files = array("zastava","avto");
     if(upload_files($files)->get_flag()){
         $sql = "UPDATE teams SET name = '". $_POST['ime']."', engine = '".$_POST['motor']."', primary_color = '".$_POST['primarna']."', secondary_color = '".$_POST['sekundarna']."', car = '".$_FILES['avto']['name']."', flag = '".$_FILES['zastava']['name']."' WHERE idteams = ".$_POST['id'].";";
@@ -104,11 +111,59 @@ if(!empty($_FILES['logo']) && !empty($_FILES['avto']) && !empty($_FILES['zastava
             header("Location: ../admin/team.php?id=".$_POST['id']."&updated=False");
         }
     
+    }else{
+        echo "prvi if failed 4";
     }
+
+}else if(file_exists($_FILES['avto']['tmp_name'])){
+    $files = array("avto");
+    if(upload_files($files)->get_flag()){
+        $sql = "UPDATE teams SET name = '". $_POST['ime']."', engine = '".$_POST['motor']."', primary_color = '".$_POST['primarna']."', secondary_color = '".$_POST['sekundarna']."', car = '".$_FILES['avto']['name']."' WHERE idteams = ".$_POST['id'].";";
+        if($result = mysqli_query($conn, $sql)){
+            header("Location: ../admin/team.php?id=".$_POST['id']."&updated=True");
+        }else{
+            header("Location: ../admin/team.php?id=".$_POST['id']."&updated=False");
+        }
+    
+    }else{
+        echo "prvi if failed 5";
+    }
+
+}else if(file_exists($_FILES['logo']['tmp_name'])){
+    $files = array("logo");
+    if(upload_files($files)->get_flag()){
+        $sql = "UPDATE teams SET name = '". $_POST['ime']."', engine = '".$_POST['motor']."', primary_color = '".$_POST['primarna']."', secondary_color = '".$_POST['sekundarna']."', logo = '".$_FILES['logo']['name']."' WHERE idteams = ".$_POST['id'].";";
+        if($result = mysqli_query($conn, $sql)){
+            header("Location: ../admin/team.php?id=".$_POST['id']."&updated=True");
+        }else{
+            header("Location: ../admin/team.php?id=".$_POST['id']."&updated=False");
+        }
+    
+    }else{
+        echo "prvi if failed 6";
+    }
+
+}else if(file_exists($_FILES['zastava']['tmp_name'])){
+    $files = array("zastava");
+    if(upload_files($files)->get_flag()){
+        $sql = "UPDATE teams SET name = '". $_POST['ime']."', engine = '".$_POST['motor']."', primary_color = '".$_POST['primarna']."', secondary_color = '".$_POST['sekundarna']."', flag = '".$_FILES['zastava']['name']."' WHERE idteams = ".$_POST['id'].";";
+        if($result = mysqli_query($conn, $sql)){
+            header("Location: ../admin/team.php?id=".$_POST['id']."&updated=True");
+        }else{
+            header("Location: ../admin/team.php?id=".$_POST['id']."&updated=False");
+        }
+    
+    }else{
+        echo "prvi if failed 7";
+    }
+
+}else if(!file_exists($_FILES['logo']) && !file_exists($_FILES['avto']) && !file_exists($_FILES['zastava'])){
+    $sql = "UPDATE teams SET name = '". $_POST['ime']."', engine = '".$_POST['motor']."', primary_color = '".$_POST['primarna']."', secondary_color = '".$_POST['sekundarna']."' WHERE idteams = ".$_POST['id'].";";
+        if($result = mysqli_query($conn, $sql)){
+            header("Location: ../admin/team.php?id=".$_POST['id']."&updated=True");
+        }else{
+            header("Location: ../admin/team.php?id=".$_POST['id']."&updated=False");
+        }
 }
-
-
-
-
-
+    
 ?>
