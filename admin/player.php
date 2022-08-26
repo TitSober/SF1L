@@ -83,13 +83,160 @@ if(!empty($_SESSION['id']) && !empty($_GET['id'])){?>
   </div>
 </nav>
 <!-- Main body of page other is static -->
-<div class="container">
+<?php
 
+  $sql1 = "SELECT * FROM driver WHERE iddriver = ". mysqli_real_escape_string($conn, $_GET['id']);
+  if($result1 = mysqli_query($conn, $sql1)){
+    while($row=mysqli_fetch_assoc($result1)){
+
+
+
+?>
+<div class="container border bg-light">
+    <form enctype="multipart/form-data" action="../backend/add_player_db.php" method="post">
+    <div class="container mb-5 mt-3">
+        <div class="row">
+            <div class="col"><h3>DODAJ VOZNIKA</h3></div>
+        </div>
+        <div class="row drivers">
+            <div class="col"><label for="ime" class="col-form-label">Ime</label></div>
+            <div class="col me-5"><input type="text" name="ime" class="form-control" value="<?php echo $row['name'];?>"></div>
+        </div>
+        <div class="row drivers">
+            <div class="col"><label for="priimek" class="col-form-label">Priimek</label></div>
+            <div class="col me-5"><input type="text" name="priimek" class="form-control" value="<?php echo $row['lastname'];?>"></div>
+        </div>
+        <div class="row drivers">
+            <div class="col"><label for="datum" class="col-form-label">Datum rojstva</label></div>
+            <div class="col me-5"><input type="date" name="datum" class="form-control" value="<?php echo $row['date_of_birth'];?>"></div>
+        </div>
+        <div class="row drivers">
+            <div class="col"><label for="discord" class="col-form-label">Discord username</label></div>
+            <div class="col me-5"><input type="text" class="form-control" name="discord" value="<?php echo $row['discord_username'];?>"></div>
+        </div>
+        <div class="row drivers">
+            <div class="col"><label for="tag" class="col-form-label">Game tag</label></div>
+            <div class="col me-5"><input type="text" class="form-control" name="tag" value="<?php echo $row['game_tag'];?>"></div>
+        </div>
+        <div class="row drivers">
+            <div class="col"><label for="steam-code" class="col-form-label">Steam friend code</label></div>
+            <div class="col me-5"><input type="text" class="form-control" name="steam-code" value="<?php echo $row['steam_friend_code'];?>"></div>
+        </div>
+        <div class="row drivers">
+            <div class="col"><label for="stevilka" class="col-form-label">Številka</label></div>
+            <div class="col me-5"><input type="number" name="stevilka" class="form-control" value="<?php echo $row['driver_number'];?>"></div>
+        </div>
+        <div class="row drivers">
+            <div class="col"><label for="ekipa" class="col-form-label">Ekipa</label></div>
+            <div class="col me-5">
+                <!-- Creating a dropdown menu with all the teams from the database. -->
+                <select name="ekipa" class="form-control" selected="<?php 
+                  $selectTeam = "SELECT name from teams WHERE idteams = ". $row['teams_idteams'].";";
+                  if($team = mysqli_query($conn, $selectTeam)){
+                    while($prevTeam=mysqli_fetch_assoc($team)){
+                      echo $prevTeam['name'];
+                    }
+                  }else{
+                    echo "no teams";
+                  }
+                ?>"><?php
+                    $result = mysqli_query($conn, "SELECT name, idteams from teams");
+                    if($result){
+                        while($row1 = mysqli_fetch_assoc($result)){
+                            echo "<option value=".$row1['idteams'].">".$row1['name']."</option>";
+                        }
+                    }    
+                ?></select>
+            </div>
+        </div>
+        <div class="row drivers">
+            <div class="col"><label for="oprema" class="col-form-label">Oprema</label></div>
+            <div class="col me-5">
+                <select name="oprema" class="form-control" selected = "<?php echo $row['equipment'];?>">
+                    <option value="Logitech">Logitech</option>
+                    <option value="Thrustmaster">Thrustmaster</option>
+                    <option value="Fanatec">Fanatec</option>
+                    <option value="Kontroler">Kontroler</option>
+                    <option value="Tipkovnica">Tipkovnica</option>
+                </select>
+            </div>
+        </div>
+        <div class="row drivers">
+            <div class="col"><label for="status" class="col-form-label">Status voznika</label></div>
+            <div class="col me-5">
+                <select name="status" class="form-control" selected = "<?php echo $row['driver_status'];?>">
+                    <option value="stalni">Stalni</option>
+                    <option value="rezervni">Rezervni</option>
+                </select>
+            </div>
+        </div>
+        <div class="row drivers">
+            <div class="col"><label for="platforma" class="col-form-label">Platforma</label></div>
+            <div class="col me-5">
+                <select name="platforma" class="form-control">
+                    <option value="PlayStation">PlayStation</option>
+                    <option value="Steam">Steam</option>
+                    <option value="Xbox">Xbox</option>
+                    <option value="Origin">Origin</option>
+                    <option value="Epic">Epic</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="container drivers mb-5">
+        <h5 class="text-secondary">Asistence</h5>
+        <hr class="bg-dark border-2 border-top border-dark">
+        
+        <div class="row">
+            <div class="col-4"><label class="col-form-label" for="Gearbox">Gearbox</label></div>
+            <div class="col-2"><input type="checkbox" name="Gearbox" id="gb" value="1" class="form-check-input"></div>
+            <div class="col-4"><label class="col-form-label" for="Traction">Traction control</label></div>
+            <div class="col-2"><input type="checkbox" name="Traction" id="tc" value="1" class="form-check-input"></div>
+        </div>
+        <div class="row">
+            <div class="col-4"><label class="col-form-label" for="abs">ABS</label></div>
+            <div class="col-2"><input type="checkbox" name="ABS" id="abs" value="1" class="form-check-input"></div>
+            <div class="col-4"><label class="col-form-label" for="rl">Racing Line</label></div>
+            <div class="col-2"><input type="checkbox" name="Racing" id="rl" value="1" class="form-check-input"></div>
+        </div>
+    </div>
+    <div class="container drivers">
+        <h5 class="text-secondary">Grafični elementi</h5>
+        <hr class="bg-dark border-2 border-top border-dark">
+        <div class="row">
+            <div class="col-2"><label for="front" class="col-form-label">Front</label></div>
+            <div class="col-4"><input type="file" name="front" class="form-control form-control-sm" required></div>
+            <div class="col-2"><label for="zmagovalna" class="col-form-label">Zmagovalna</label></div>
+            <div class="col-4"><input type="file" name="zmagovalna" class="form-control form-control-sm" required></div>
+        </div>
+        <div class="row">
+            <div class="col-2"><label for="leva_profilna" class="col-form-label">Leva profilna</label></div>
+            <div class="col-4"><input type="file" name="leva_profilna" class="form-control form-control-sm" required></div>
+            <div class="col-2"><label for="desna_profilna" class="col-form-label">Desna profilna</label></div>
+            <div class="col-4"><input type="file" name="desna_profilna" class="form-control form-control-sm" required></div>
+        </div>
+        <div class="row">
+            <div class="col-2"><label for="lower_third" class="col-form-label">Lower third</label></div>
+            <div class="col-4"><input type="file" name="lower_third" class="form-control form-control-sm" required></div>
+            
+            <div class="col-2"><input type="submit" class="btn btn-primary" value="Potrdi tekmovalca"></div>
+            
+            
+        </div>
+    </div>
+
+
+
+
+    </form>
 
 
 </div>
+<?php
 
-
+            }
+                  }
+?>
 
 
 <footer id="footer" class="mt-auto py-3 footer bg-light">

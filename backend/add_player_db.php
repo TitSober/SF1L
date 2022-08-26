@@ -69,7 +69,7 @@ $leva = mysqli_real_escape_string($conn,str_replace(" ", "-",$_FILES['leva_profi
 $desna = mysqli_real_escape_string($conn,str_replace(" ", "-",$_FILES['desna_profilna']['name']));
 $lt = mysqli_real_escape_string($conn,str_replace(" ", "-",$_FILES['lower_third']['name']));
 if($files_uploaded){
-      $result = mysqli_query($conn, "INSERT INTO driver(ime, priimek, discord_username, platform, game_tag, steam_friend_code, driver_status, date_of_birth, equipment, driver_number, teams_idteams, front_photo,left_profile_photo, right_profile_photo, winner_photo, LT_photo,Gearbox,ABS, Traction_control, Racing_line) VALUES('$ime', '$priimek','$discord', '$platforma', '$tag', '$steam', '$status', '$datum', '$oprema',$stevilka,$ekipa,'$front', '$leva', '$desna', '$zmagovalna','$lt',$gb, $abs,$tr,$rl);");
+      $result = mysqli_query($conn, "INSERT INTO driver(name, lastname, discord_username, platform, game_tag, steam_friend_code, driver_status, date_of_birth, equipment, driver_number, teams_idteams, front_photo,left_profile_photo, right_profile_photo, winner_photo, LT_photo,Gearbox,ABS, Traction_control, Racing_line) VALUES('$ime', '$priimek','$discord', '$platforma', '$tag', '$steam', '$status', '$datum', '$oprema',$stevilka,$ekipa,'$front', '$leva', '$desna', '$zmagovalna','$lt',$gb, $abs,$tr,$rl);");
    if($result){
       header("Location: ../admin/add_players.php");
    }else{

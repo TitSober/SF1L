@@ -93,7 +93,18 @@ include('../backend/db_connect.php')
   </div>
 </nav>
 <!-- Main body of page other is static -->
+<div class="container">
+  <div class="row">
+    <div class="col"><h1 class="text-center">Wellcome to the admin dashboard</h1></div>
+  </div>
+  <div class="row drivers">
+    <div class="col">
+      <p>This is the temporary text written to give the site a bit more structure, the actuall content will be filled out later as development continues. </p>
 
+
+    </div>
+  </div>
+</div>
 
 
 

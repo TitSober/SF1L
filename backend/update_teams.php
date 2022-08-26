@@ -59,7 +59,7 @@ if(file_exists($_FILES['logo']['tmp_name']) && file_exists($_FILES['avto']['tmp_
     $files = array("logo", "zastava","avto");
     $flag = upload_files($files)->get_flag();
     if($flag){
-        $sql = "UPDATE teams SET name = '". $_POST['ime']."', engine = '".$_POST['motor']."', primary_color = '".$_POST['primarna']."', secondary_color = '".$_POST['sekundarna']."', logo = '".$_FILES['logo']['name']."', car = '".$_FILES['avto']['name']."', flag = '".$_FILES['zastava']['name']."' WHERE idteams = ".$_POST['id'].";";
+        $sql = "UPDATE teams SET name = '".  mysqli_real_escape_string($conn, $_POST['ime'])."', engine = '". mysqli_real_escape_string($conn, $_POST['motor'])."', primary_color = '". mysqli_real_escape_string($conn, $_POST['primarna'])."', secondary_color = '". mysqli_real_escape_string($conn, $_POST['sekundarna'])."', logo = '".$_FILES['logo']['name']."', car = '".$_FILES['avto']['name']."', flag = '".$_FILES['zastava']['name']."' WHERE idteams = ".$_POST['id'].";";
         if($result = mysqli_query($conn, $sql)){
             header("Location: ../admin/team.php?id=".$_POST['id']."&updated=True");
         }else{
@@ -76,7 +76,7 @@ if(file_exists($_FILES['logo']['tmp_name']) && file_exists($_FILES['avto']['tmp_
 }else if(file_exists($_FILES['logo']['tmp_name']) && file_exists($_FILES['avto']['tmp_name'])){
     $files = array("logo","avto");
     if(upload_files($files)->get_flag()){
-        $sql = "UPDATE teams SET name = '". $_POST['ime']."', engine = '".$_POST['motor']."', primary_color = '".$_POST['primarna']."', secondary_color = '".$_POST['sekundarna']."', logo = '".$_FILES['logo']['name']."', car = '".$_FILES['avto']['name']."' WHERE idteams = ".$_POST['id'].";";
+        $sql = "UPDATE teams SET name = '".  mysqli_real_escape_string($conn, $_POST['ime'])."', engine = '". mysqli_real_escape_string($conn, $_POST['motor'])."', primary_color = '". mysqli_real_escape_string($conn, $_POST['primarna'])."', secondary_color = '". mysqli_real_escape_string($conn, $_POST['sekundarna'])."', logo = '".$_FILES['logo']['name']."', car = '".$_FILES['avto']['name']."' WHERE idteams = ".$_POST['id'].";";
         if($result = mysqli_query($conn, $sql)){
             header("Location: ../admin/team.php?id=".$_POST['id']."&updated=True");
         }else{
@@ -90,7 +90,7 @@ if(file_exists($_FILES['logo']['tmp_name']) && file_exists($_FILES['avto']['tmp_
 }else if(file_exists($_FILES['logo']['tmp_name']) && file_exists($_FILES['zastava']['tmp_name'])){
     $files = array("logo","zastava");
     if(upload_files($files)->get_flag()){
-        $sql = "UPDATE teams SET name = '". $_POST['ime']."', engine = '".$_POST['motor']."', primary_color = '".$_POST['primarna']."', secondary_color = '".$_POST['sekundarna']."', logo = '".$_FILES['logo']['name']."', flag = '".$_FILES['zastava']['name']."' WHERE idteams = ".$_POST['id'].";";
+        $sql = "UPDATE teams SET name = '".  mysqli_real_escape_string($conn, $_POST['ime'])."', engine = '". mysqli_real_escape_string($conn, $_POST['motor'])."', primary_color = '". mysqli_real_escape_string($conn, $_POST['primarna'])."', secondary_color = '". mysqli_real_escape_string($conn, $_POST['sekundarna'])."', logo = '".$_FILES['logo']['name']."', flag = '".$_FILES['zastava']['name']."' WHERE idteams = ".$_POST['id'].";";
         if($result = mysqli_query($conn, $sql)){
             header("Location: ../admin/team.php?id=".$_POST['id']."&updated=True");
         }else{
@@ -104,7 +104,7 @@ if(file_exists($_FILES['logo']['tmp_name']) && file_exists($_FILES['avto']['tmp_
 }else if(file_exists($_FILES['avto']['tmp_name']) && file_exists($_FILES['zastava']['tmp_name'])){
     $files = array("zastava","avto");
     if(upload_files($files)->get_flag()){
-        $sql = "UPDATE teams SET name = '". $_POST['ime']."', engine = '".$_POST['motor']."', primary_color = '".$_POST['primarna']."', secondary_color = '".$_POST['sekundarna']."', car = '".$_FILES['avto']['name']."', flag = '".$_FILES['zastava']['name']."' WHERE idteams = ".$_POST['id'].";";
+        $sql = "UPDATE teams SET name = '". mysqli_real_escape_string($conn, $_POST['ime'])."', engine = '". mysqli_real_escape_string($conn, $_POST['motor'])."', primary_color = '". mysqli_real_escape_string($conn, $_POST['primarna'])."', secondary_color = '". mysqli_real_escape_string($conn, $_POST['sekundarna'])."', car = '".$_FILES['avto']['name']."', flag = '".$_FILES['zastava']['name']."' WHERE idteams = ".$_POST['id'].";";
         if($result = mysqli_query($conn, $sql)){
             header("Location: ../admin/team.php?id=".$_POST['id']."&updated=True");
         }else{
@@ -118,7 +118,7 @@ if(file_exists($_FILES['logo']['tmp_name']) && file_exists($_FILES['avto']['tmp_
 }else if(file_exists($_FILES['avto']['tmp_name'])){
     $files = array("avto");
     if(upload_files($files)->get_flag()){
-        $sql = "UPDATE teams SET name = '". $_POST['ime']."', engine = '".$_POST['motor']."', primary_color = '".$_POST['primarna']."', secondary_color = '".$_POST['sekundarna']."', car = '".$_FILES['avto']['name']."' WHERE idteams = ".$_POST['id'].";";
+        $sql = "UPDATE teams SET name = '". mysqli_real_escape_string($conn, $_POST['ime'])."', engine = '". mysqli_real_escape_string($conn, $_POST['motor'])."', primary_color = '". mysqli_real_escape_string($conn, $_POST['primarna'])."', secondary_color = '". mysqli_real_escape_string($conn, $_POST['sekundarna'])."', car = '".$_FILES['avto']['name']."' WHERE idteams = ".$_POST['id'].";";
         if($result = mysqli_query($conn, $sql)){
             header("Location: ../admin/team.php?id=".$_POST['id']."&updated=True");
         }else{
@@ -132,7 +132,7 @@ if(file_exists($_FILES['logo']['tmp_name']) && file_exists($_FILES['avto']['tmp_
 }else if(file_exists($_FILES['logo']['tmp_name'])){
     $files = array("logo");
     if(upload_files($files)->get_flag()){
-        $sql = "UPDATE teams SET name = '". $_POST['ime']."', engine = '".$_POST['motor']."', primary_color = '".$_POST['primarna']."', secondary_color = '".$_POST['sekundarna']."', logo = '".$_FILES['logo']['name']."' WHERE idteams = ".$_POST['id'].";";
+        $sql = "UPDATE teams SET name = '". mysqli_real_escape_string($conn, $_POST['ime'])."', engine = '". mysqli_real_escape_string($conn, $_POST['motor'])."', primary_color = '". mysqli_real_escape_string($conn, $_POST['primarna'])."', secondary_color = '". mysqli_real_escape_string($conn, $_POST['sekundarna'])."', logo = '".$_FILES['logo']['name']."' WHERE idteams = ".$_POST['id'].";";
         if($result = mysqli_query($conn, $sql)){
             header("Location: ../admin/team.php?id=".$_POST['id']."&updated=True");
         }else{
@@ -146,7 +146,7 @@ if(file_exists($_FILES['logo']['tmp_name']) && file_exists($_FILES['avto']['tmp_
 }else if(file_exists($_FILES['zastava']['tmp_name'])){
     $files = array("zastava");
     if(upload_files($files)->get_flag()){
-        $sql = "UPDATE teams SET name = '". $_POST['ime']."', engine = '".$_POST['motor']."', primary_color = '".$_POST['primarna']."', secondary_color = '".$_POST['sekundarna']."', flag = '".$_FILES['zastava']['name']."' WHERE idteams = ".$_POST['id'].";";
+        $sql = "UPDATE teams SET name = '". mysqli_real_escape_string($conn, $_POST['ime'])."', engine = '". mysqli_real_escape_string($conn, $_POST['motor'])."', primary_color = '". mysqli_real_escape_string($conn, $_POST['primarna'])."', secondary_color = '". mysqli_real_escape_string($conn, $_POST['sekundarna'])."', flag = '".$_FILES['zastava']['name']."' WHERE idteams = ".$_POST['id'].";";
         if($result = mysqli_query($conn, $sql)){
             header("Location: ../admin/team.php?id=".$_POST['id']."&updated=True");
         }else{
@@ -158,7 +158,7 @@ if(file_exists($_FILES['logo']['tmp_name']) && file_exists($_FILES['avto']['tmp_
     }
 
 }else if(!file_exists($_FILES['logo']) && !file_exists($_FILES['avto']) && !file_exists($_FILES['zastava'])){
-    $sql = "UPDATE teams SET name = '". $_POST['ime']."', engine = '".$_POST['motor']."', primary_color = '".$_POST['primarna']."', secondary_color = '".$_POST['sekundarna']."' WHERE idteams = ".$_POST['id'].";";
+    $sql = "UPDATE teams SET name = '". mysqli_real_escape_string($conn, $_POST['ime'])."', engine = '". mysqli_real_escape_string($conn, $_POST['motor'])."', primary_color = '". mysqli_real_escape_string($conn, $_POST['primarna'])."', secondary_color = '". mysqli_real_escape_string($conn, $_POST['sekundarna'])."' WHERE idteams = ".$_POST['id'].";";
         if($result = mysqli_query($conn, $sql)){
             header("Location: ../admin/team.php?id=".$_POST['id']."&updated=True");
         }else{

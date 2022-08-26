@@ -161,8 +161,8 @@ if(!empty($_SESSION['id'])){?>
                     <option value="PlayStation">PlayStation</option>
                     <option value="Steam">Steam</option>
                     <option value="Xbox">Xbox</option>
-                    <option value="Xbox">Origin</option>
-                    <option value="Xbox">Epic</option>
+                    <option value="Origin">Origin</option>
+                    <option value="Epic">Epic</option>
                 </select>
             </div>
         </div>
