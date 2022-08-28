@@ -92,13 +92,14 @@ if(!empty($_SESSION['id']) && !empty($_GET['id'])){?>
 
 
 ?>
-<div class="container border bg-light">
-    <form enctype="multipart/form-data" action="../backend/add_player_db.php" method="post">
+<div class="container border bg-light pb-2">
+    <form enctype="multipart/form-data" action="../backend/update_player.php" method="post">
     <div class="container mb-5 mt-3">
         <div class="row">
             <div class="col"><h3>DODAJ VOZNIKA</h3></div>
         </div>
         <div class="row drivers">
+          <input type="hidden" name="id" value="<?echo $_GET['id'];?>">
             <div class="col"><label for="ime" class="col-form-label">Ime</label></div>
             <div class="col me-5"><input type="text" name="ime" class="form-control" value="<?php echo $row['name'];?>"></div>
         </div>
@@ -173,7 +174,7 @@ if(!empty($_SESSION['id']) && !empty($_GET['id'])){?>
         <div class="row drivers">
             <div class="col"><label for="platforma" class="col-form-label">Platforma</label></div>
             <div class="col me-5">
-                <select name="platforma" class="form-control">
+                <select name="platforma" class="form-control" selected = "<?php echo $row['platform'];?>">
                     <option value="PlayStation">PlayStation</option>
                     <option value="Steam">Steam</option>
                     <option value="Xbox">Xbox</option>
@@ -189,39 +190,62 @@ if(!empty($_SESSION['id']) && !empty($_GET['id'])){?>
         
         <div class="row">
             <div class="col-4"><label class="col-form-label" for="Gearbox">Gearbox</label></div>
-            <div class="col-2"><input type="checkbox" name="Gearbox" id="gb" value="1" class="form-check-input"></div>
+            <div class="col-2"><input type="checkbox" name="Gearbox" id="gb" value="1" class="form-check-input" <?php echo ($row['Gearbox']) ? 'checked' : ''; ?>></div>
             <div class="col-4"><label class="col-form-label" for="Traction">Traction control</label></div>
-            <div class="col-2"><input type="checkbox" name="Traction" id="tc" value="1" class="form-check-input"></div>
+            <div class="col-2"><input type="checkbox" name="Traction" id="tc" value="1" class="form-check-input" <?php echo ($row['Traction_control']) ? 'checked' : ''; ?>></div>
         </div>
         <div class="row">
             <div class="col-4"><label class="col-form-label" for="abs">ABS</label></div>
-            <div class="col-2"><input type="checkbox" name="ABS" id="abs" value="1" class="form-check-input"></div>
+            <div class="col-2"><input type="checkbox" name="ABS" id="abs" value="1" class="form-check-input"<?php echo ($row['ABS']) ? 'checked' : ''; ?>></div>
             <div class="col-4"><label class="col-form-label" for="rl">Racing Line</label></div>
-            <div class="col-2"><input type="checkbox" name="Racing" id="rl" value="1" class="form-check-input"></div>
+            <div class="col-2"><input type="checkbox" name="Racing" id="rl" value="1" class="form-check-input"<?php echo ($row['Racing_line']) ? 'checked' : ''; ?>></div>
         </div>
     </div>
     <div class="container drivers">
         <h5 class="text-secondary">Grafični elementi</h5>
         <hr class="bg-dark border-2 border-top border-dark">
         <div class="row">
-            <div class="col-2"><label for="front" class="col-form-label">Front</label></div>
-            <div class="col-4"><input type="file" name="front" class="form-control form-control-sm" required></div>
-            <div class="col-2"><label for="zmagovalna" class="col-form-label">Zmagovalna</label></div>
-            <div class="col-4"><input type="file" name="zmagovalna" class="form-control form-control-sm" required></div>
+          <div class="col"><h3>Front</h3></div>
+          <div class="col"><?php echo "<img src='../images/front/".$row['front_photo']."' class='img-fluid' style='max-width:30%;'>";?></div>
         </div>
         <div class="row">
-            <div class="col-2"><label for="leva_profilna" class="col-form-label">Leva profilna</label></div>
-            <div class="col-4"><input type="file" name="leva_profilna" class="form-control form-control-sm" required></div>
-            <div class="col-2"><label for="desna_profilna" class="col-form-label">Desna profilna</label></div>
-            <div class="col-4"><input type="file" name="desna_profilna" class="form-control form-control-sm" required></div>
+          <div class="col"><input type="file" name="front" class="form-control form-control-sm" ></div>
+          
         </div>
         <div class="row">
-            <div class="col-2"><label for="lower_third" class="col-form-label">Lower third</label></div>
-            <div class="col-4"><input type="file" name="lower_third" class="form-control form-control-sm" required></div>
-            
-            <div class="col-2"><input type="submit" class="btn btn-primary" value="Potrdi tekmovalca"></div>
-            
-            
+          <div class="col"><h3>Levi profil</h3></div>
+          <div class="col"><?php echo "<img src='../images/leva_profilna/".$row['left_profile_photo']."' class='img-fluid' style='max-width:30%;'>";?></div>
+        </div>
+        <div class="row">
+          
+          <div class="col"><input type="file" name="leva_profilna" class="form-control form-control-sm" ></div>
+        </div>
+        <div class="row">
+          <div class="col"><h3>Desni profil</h3></div>
+          <div class="col"><?php echo "<img src='../images/desna_profilna/".$row['right_profile_photo']."' class='img-fluid' style='max-width:30%;'>";?></div>
+        </div>
+        <div class="row">
+          
+          <div class="col"><input type="file" name="desna_profilna" class="form-control form-control-sm" ></div>
+        </div>
+        <div class="row">
+          <div class="col"><h3>Lower third</h3></div>
+          <div class="col"><?php echo "<img src='../images/lower_third/".$row['LT_photo']."' class='img-fluid' style='max-width:30%;'>";?></div>
+        </div>
+        <div class="row">
+          
+          <div class="col"><input type="file" name="lower_third" class="form-control form-control-sm" ></div>
+        </div>
+        <div class="row">
+          <div class="col"><h3>Zmagovalna</h3></div>
+          <div class="col"><?php echo "<img src='../images/zmagovalna/".$row['winner_photo']."' class='img-fluid' style='max-width:30%;'>";?></div>
+        </div>
+        <div class="row">
+          
+          <div class="col"><input type="file" name="zmagovalna" class="form-control form-control-sm"></div>
+        </div>
+        <div class="row">
+          <div class="col"><input type="submit" value="Potrdi spremembe" class="btn btn-primary"></div>
         </div>
     </div>
 

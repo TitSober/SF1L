@@ -107,7 +107,7 @@ include('../backend/db_connect.php')
     </thead>
     <tbody class="drivers">
         <?php
-            $sql = "SELECT d.ime ime, d.priimek priimek, d.platform platform, d.game_tag gtag, d.iddriver id, t.name as name FROM driver d, teams t WHERE d.teams_idteams = t.idteams"; 
+            $sql = "SELECT d.name ime, d.lastname priimek, d.platform platform, d.game_tag gtag, d.iddriver id, t.name as name FROM driver d, teams t WHERE d.teams_idteams = t.idteams"; 
             $result = mysqli_query($conn, $sql);
             if($result){
                 while($row = mysqli_fetch_assoc($result)){
