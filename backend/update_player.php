@@ -23,7 +23,7 @@ function upload_files($files_names){
     
     $files_uploaded = new ErrorCode(TRUE,"");
     for($i = 0; $i < count($files_names);$i++){
-        $errors= array();t78fgzduc
+        $errors= array();
         $file_name = str_replace(" ", "-",$_FILES[$files_names[$i]]['name']);
         $file_size =$_FILES[$files_names[$i]]['size'];
         $file_tmp =$_FILES[$files_names[$i]]['tmp_name'];
@@ -57,16 +57,18 @@ $files = array("front","leva_profilna","desna_profilna","lower_third","zmagovaln
 $filesThatExist = array();
 
 /* Checking if the file exists and if it does it is pushing it to the array and uploads it to the ftp server. */
-foreach ($files as $name){
-    if(file_exists($_FILES[$name]['tmp_name'])){
-        if($message = upload_files($name)->get_flag()){
-            array_push($filesThatExist, $name)
+for($i = 0; $i < count($files); $i++){
+    if(file_exists($_FILES[$files[$i]]['tmp_name'])){
+        if($message = upload_files($files[$i])->get_flag()){
+            array_push($filesThatExist, $name);
 
-        }else{
+        }
+        else{
             header("Location: ../admin/player.php?message=".$message->get_error_code());
 
         }
     }
+    
 }
 
 $name = mysqli_real_escape_string($conn,$_POST['ime']);
@@ -87,9 +89,23 @@ $traction = mysqli_real_escape_string($conn,$_POST['Traction']);
 $id = mysqli_real_escape_string($conn,$_POST['id']);
 
 
+$getDBFileNames = "SELECT front_photo fp,right_profile_photo rp,left_profile_photo lp,winner_photo wp,LT_photo ltp WHERE iddriver = $id;";
+
+if($result=mysqli_query($conn,$getDBFileNames)){
+    while($row = mysqli_fetch_assoc($result)){
+        $sql = "UPDATE driver SET name = $name, lastname = $lastname, discord_username=$discord,platform=$platform,game_tag=$tag,steam_friend_code=$steam_code,driver_status=$status,date_of_birth=$date,equipment=$eq,driver_number=$number,Gearbox=$gear,ABS=$abs,Traction_control=$traction,Racing_line=$rl,front_photo = if(".file_exists($_FILES['front']['tmp_name']).",".$_FILES['front']['name'].",".$row['fp']."),left_profile_photo = if(".file_exists($_FILES['leva_profilna']['tmp_name']).",".$_FILES['leva_profilna']['name'].",".$row['lp']."), right_profile_photo = if(".file_exists($_FILES['desna_profilna']['tmp_name']).",".$_FILES['desna_profilna']['name'].",".$row['rp']."),winner_photo =if(".file_exists($_FILES['zmagovalna']['tmp_name']).",".$_FILES['zmagovalna']['name'].",".$row['wp']."),LT_photo = if(".file_exists($_FILES['lower_third']['tmp_name']).",".$_FILES['lower_third']['name'].",".$row['ltp'].") WHERE iddriver = $id;";
+        if($result = mysqli_query($conn, $sql)){
+            header("Location: ../admin/player.php?message=success");
+        }
+        else{header("Location: ../admin/player.php?message=error");}
 
 
-$sql = "UPDATE driver SET name = $name, lastname = $lastname, discord_username=$discord,platform=$platform,game_tag=$tag,steam_friend_code=$steam_code,driver_status=$status,date_of_birth=$date,equipment=$eq,driver_number=$number,Gearbox=$gear,ABS=$abs,Traction_control=$traction,Racing_line=$rl";
+
+
+    } 
+}
+
+
 
 
 ?>
