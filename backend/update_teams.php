@@ -53,7 +53,7 @@ function upload_files($files_names){
 
 }
 
-echo "here";
+
 
 if(file_exists($_FILES['logo']['tmp_name']) && file_exists($_FILES['avto']['tmp_name']) && file_exists($_FILES['zastava']['tmp_name'])){
     $files = array("logo", "zastava","avto");

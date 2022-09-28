@@ -99,7 +99,7 @@ if(!empty($_SESSION['id']) && !empty($_GET['id'])){?>
             <div class="col"><h3>DODAJ VOZNIKA</h3></div>
         </div>
         <div class="row drivers">
-          <input type="hidden" name="id" value="<?echo $_GET['id'];?>">
+          <input type="hidden" name="id" value="<?php echo $_GET['id'];?>">
             <div class="col"><label for="ime" class="col-form-label">Ime</label></div>
             <div class="col me-5"><input type="text" name="ime" class="form-control" value="<?php echo $row['name'];?>"></div>
         </div>

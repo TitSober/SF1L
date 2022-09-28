@@ -117,7 +117,7 @@ include('../backend/db_connect.php')
                     echo "<td>".$row['name']."</td>";
                     echo "<td>".$row['platform']."</td>";
                     echo "<td>".$row['gtag']."</td>";
-                    echo "<td><a target='_blank' href='player.php?id=".$row['id']."'>Link</a></td>";
+                    echo "<td><a target='_blank' href='player.php?id=".$row['id']."' class='btn btn-primary'>Link</a></td>";
 
 
                     echo "</tr>";

@@ -9,9 +9,6 @@ if(!empty($_SESSION['id'])){
 include('../backend/db_connect.php')
 
 ?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,21 +41,12 @@ include('../backend/db_connect.php')
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a class="dropdown-item" href="manage_seasons.php">Urejanje sezone</a></li>
-            
+            <li><a class="dropdown-item" href="add_seasons.php">Dodaj sezone</a></li>
             
           </ul>
         </li>
 
-        <li class="nav-item dropdown ">
-          <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-           SPONZORJI
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="manage_sponsors.php">Urejanje sponzorjev</a></li>
-            
-            
-          </ul>
-        </li>
+
         <li class="nav-item dropdown ">
           <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             KOMISIJSKA SOBA
@@ -103,20 +91,79 @@ include('../backend/db_connect.php')
 </nav>
 <!-- Main body of page other is static -->
 <div class="container">
-  <div class="row">
-    <div class="col"><h1 class="text-center">Wellcome to the admin dashboard</h1></div>
-  </div>
-  <div class="row drivers">
-    <div class="col">
-      <p>This is the temporary text written to give the site a bit more structure, the actuall content will be filled out later as development continues. </p>
+  <table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Ime sponzorja</th>
+            <th scope="col">Spletna stran</th>
+            <th scope="col">Delete</th>
+            <th><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Dodaj nov sponzor
+</button></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+            $sql = "SELECT * from sponsors;";
+            $result = mysqli_query($conn, $sql);
+            if($result){
+                while($row= mysqli_fetch_assoc($result)){
+                    echo "<tr>";
+                    echo "<th scope='row'>".$row['idsponsors']."</th>";
+                    echo "<th>".$row['display_name']."</th>";
+                    echo "<th>".$row['website']."</th>";
+                    echo "<th ><a href='../backend/delete_season.php?id=".$row['idsponsors']."' class='btn btn-primary'>Delete</a></th>";
+                    echo "<th> </th>";
+                    echo "</tr>";
+                }
+            }
+        
+        ?>
 
 
+
+    </tbody>
+
+
+
+  </table>
+</div>
+
+
+<!-- modal time ;)
+-->
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Dodaj sponzor</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="../backend/add_sponsor_to_db.php" method="post">
+      <div class="modal-body">
+        
+           <label for="name" class="form-label">Ime sponzorja</label>
+           <input type="text" class="form-control" name="name"> 
+           <label for="web" class="form-label">Spletna stran sponzorja</label>
+           <input type="text" class="form-control" name="web"> 
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zapri</button>
+        <button type="submit" class="btn btn-primary">Dodaj sezono v podatkovno bazo</button>
+        </form>
+      </div>
     </div>
   </div>
 </div>
 
 
-
+<!-- end of modal times-->
 
 <footer id="footer" class="mt-auto py-3 footer bg-light">
     <div class="container">
