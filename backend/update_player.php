@@ -125,7 +125,7 @@ if($result){
 
 
 
-        $sql = "UPDATE driver SET name = '$name', lastname = '$lastname', discord_username='$discord',platform='$platform',game_tag='$tag',steam_friend_code='$steam_code',driver_status='$status',date_of_birth=$date,equipment='$eq',driver_number=$number,Gearbox=$gear,ABS=$abs,Traction_control=$traction,Racing_line=$rl,
+        $sql = "UPDATE driver SET name = '$name', lastname = '$lastname', discord_username='$discord',platform='$platform',game_tag='$tag',steam_friend_code='$steam_code',driver_status='$status',date_of_birth='$date,equipment'='$eq',driver_number=$number,Gearbox=$gear,ABS=$abs,Traction_control=$traction,Racing_line=$rl,
         front_photo = if(". $front.",'".$_FILES['front']['name']."','".$row['fp']."'),
         left_profile_photo = if(".$leva.",'".$_FILES['leva_profilna']['name']."','".$row['lp']."'),
          right_profile_photo = if(".$desni.",'".$_FILES['desna_profilna']['name']."','".$row['rp']."'),
@@ -137,6 +137,8 @@ if($result){
          $result1 = mysqli_query($conn, $sql);
         if($result1){
             header("Location: ../admin/manage_players.php?message=success");
+           
+           
         }
         else{
             

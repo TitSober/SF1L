@@ -9,6 +9,9 @@ if(!empty($_SESSION['id'])){
 include('../backend/db_connect.php')
 
 ?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,7 +26,7 @@ include('../backend/db_connect.php')
     
 
 
-    <title>F1 Dashboard</title>
+    <title>Season management</title>
 </head>
 <body>
 
@@ -41,12 +44,21 @@ include('../backend/db_connect.php')
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a class="dropdown-item" href="manage_seasons.php">Urejanje sezone</a></li>
-            <li><a class="dropdown-item" href="add_seasons.php">Dodaj sezone</a></li>
+            
             
           </ul>
         </li>
 
-
+        <li class="nav-item dropdown ">
+          <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+           SPONZORJI
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="manage_sponsors.php">Urejanje sponzorjev</a></li>
+            
+            
+          </ul>
+        </li>
         <li class="nav-item dropdown ">
           <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             KOMISIJSKA SOBA
@@ -93,69 +105,53 @@ include('../backend/db_connect.php')
 <div class="container">
   <table class="table">
     <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Ime sponzorja</th>
-            <th scope="col">Spletna stran</th>
-            <th scope="col">Delete</th>
-            <th><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Dodaj nov sponzor
+      <tr>
+        <th>Ime sezone</th>
+        <th>Dodaj sponzorje</th>
+        
+        <th><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Dodaj novo sezono
 </button></th>
-        </tr>
+        
+      </tr>
     </thead>
     <tbody>
-        <?php
-            $sql = "SELECT * from sponsors;";
-            $result = mysqli_query($conn, $sql);
-            if($result){
-                while($row= mysqli_fetch_assoc($result)){
-                    echo "<tr>";
-                    echo "<th scope='row'>".$row['idsponsors']."</th>";
-                    echo "<th>".$row['display_name']."</th>";
-                    echo "<th>".$row['website']."</th>";
-                    echo "<th ><a href='../backend/delete_season.php?id=".$row['idsponsors']."' class='btn btn-primary'>Delete</a></th>";
-                    echo "<th> </th>";
-                    echo "</tr>";
-                }
-            }
-        
-        ?>
-
-
-
+      <?php
+$sql = "SELECT * FROM season;";
+$result = mysqli_query($conn, $sql);
+if($result){
+  while($row=mysqli_fetch_assoc($result)){
+    echo "<tr>";
+    echo "<td>".$row['name']."</td>";
+    echo "<td><a href='add_sponsor_season.php?id=".$row['idseason']."' class='btn btn-primary'>Dodaj sponzor</a></td>";
+    echo "<td><a href='../backend/delete_season.php?id=".$row['idseason']."' class='btn btn-primary'>Izbriši sezono</a></td>";
+    echo "</tr>";
+  }
+}
+?>
     </tbody>
-
-
-
   </table>
 </div>
-
-
-<!-- modal time ;)
--->
-<!-- Button trigger modal -->
-
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Dodaj sponzor</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Dodaj sezono</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form action="../backend/add_sponsor_to_db.php" method="post">
+      <form action="../backend/add_season_to_db.php" method="post">
       <div class="modal-body">
         
-           <label for="name" class="form-label">Ime sponzorja</label>
+           <label for="name" class="form-label">Ime sezone</label>
            <input type="text" class="form-control" name="name"> 
-           <label for="web" class="form-label">Spletna stran sponzorja</label>
-           <input type="text" class="form-control" name="web"> 
+            
         
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zapri</button>
-        <button type="submit" class="btn btn-primary">Dodaj sponzorja v podatkovno bazo</button>
+        <button type="submit" class="btn btn-primary">Dodaj sezono v podatkovno bazo</button>
         </form>
       </div>
     </div>
@@ -164,6 +160,7 @@ include('../backend/db_connect.php')
 
 
 <!-- end of modal times-->
+
 
 <footer id="footer" class="mt-auto py-3 footer bg-light">
     <div class="container">
