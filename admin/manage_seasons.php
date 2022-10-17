@@ -29,7 +29,6 @@ include('../backend/db_connect.php')
     <title>Season management</title>
 </head>
 <body>
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="#"><h1>SF1L</h1></a>
@@ -75,8 +74,13 @@ include('../backend/db_connect.php')
         <li class="nav-item">
           <a class="nav-link active me-3" href="#">STATISTIKA</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link active me-3" href="manage_players.php">UREJANJE TEKMOVALCEV</a>
+        <li class="nav-item dropdown ">
+          <a class="nav-link dropdown-toggle active" href="manage_players.php" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">DIRKE</a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a href="manage_races.php" class="dropdown-item">Urejanje dirk</a></li>
+            <li><a class="dropdown-item" href="add_races.php">Dodajanje dirk</a></li>
+            
+          </ul>
         </li>
 
         <li class="nav-item dropdown ">
@@ -101,6 +105,8 @@ include('../backend/db_connect.php')
     </div>
   </div>
 </nav>
+
+
 <!-- Main body of page other is static -->
 <div class="container">
   <table class="table">

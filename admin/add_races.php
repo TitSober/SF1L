@@ -26,7 +26,7 @@ include('../backend/db_connect.php')
     
 
 
-    <title>F1 Dashboard</title>
+    <title>Add races</title>
 </head>
 <body>
 
@@ -108,18 +108,72 @@ include('../backend/db_connect.php')
 </nav>
 
 
+
+
 <!-- Main body of page other is static -->
-<div class="container">
-  <div class="row">
-    <div class="col"><h1 class="text-center">Wellcome to the admin dashboard</h1></div>
-  </div>
-  <div class="row drivers">
-    <div class="col">
-      <p>This is the temporary text written to give the site a bit more structure, the actuall content will be filled out later as development continues. </p>
+<div class="container border bg-light"> 
+    <form enctype="multipart/form-data" action="../backend/add_teams_db.php" method="post">
+    <div class="container">
+    <h4 class="text-secondary mt-2">Dodajanje dirk</h4>
+        <div class="row mt-3">
+            <div class="col"> <label for="name" class="form-label">Ime</label> </div>
+            <div class="col"> <input type="text" name ="name" class="form-control"> </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col"> <label for="location" class="form-label">Lokacija</label> </div>
+            <div class="col"> <input type="text" name ="location" class="form-control"> </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col"> <label for="time" class="form-label">Čas in datum</label> </div>
+            <div class="col"> <input type="datetime-local" name ="time" class="form-control"> </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col"> <label for="laps" class="form-label">Krogi</label> </div>
+            <div class="col"> <input type="number" name ="laps" class="form-control"> </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col"> <label for="season" class="form-label">Sezona</label> </div>
+            <div class="col"><select name="season" class="form-select"> <?php
+                $season_sql = "SELECT * from season;";
+                if($result = mysqli_query($conn, $season_sql)){
+                    while($row = mysqli_fetch_assoc($result)){
+                        echo "<option value='".$row['idseason']."'>".$row['name']."</option>";
+                    }
+                }
+            
+            ?> </select></div>
+        </div>
+        
+        
+
 
 
     </div>
-  </div>
+    <div class="container">
+    <h5 class="text-secondary">Grafični elementi</h5>
+    <hr class="bg-dark border-2 border-top border-dark">
+    <div class="row">
+      <div class="col">
+        <label for="track" class="form-label">Track photo</label>
+      </div>
+      <div class="col"><input type="file" name="track" class="form-control"></div>
+    </div>  
+    <div class="row mt-3">
+      <div class="col">
+        <label for="flag" class="form-label">Flag photo</label>
+      </div>
+      <div class="col"><input type="file" name="flag" class="form-control"></div>
+    </div>    
+          <div class="row mt-3 mb-3">
+            
+            <div class="col"><input type="submit" class="btn btn-primary" value="Submit"></div>
+          </div>
+    </div>
+
+
+
+
+    </form>
 </div>
 
 

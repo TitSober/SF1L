@@ -26,7 +26,7 @@ include('../backend/db_connect.php')
     
 
 
-    <title>F1 Dashboard</title>
+    <title>Race management</title>
 </head>
 <body>
 
@@ -108,18 +108,54 @@ include('../backend/db_connect.php')
 </nav>
 
 
+
 <!-- Main body of page other is static -->
 <div class="container">
-  <div class="row">
-    <div class="col"><h1 class="text-center">Wellcome to the admin dashboard</h1></div>
-  </div>
-  <div class="row drivers">
-    <div class="col">
-      <p>This is the temporary text written to give the site a bit more structure, the actuall content will be filled out later as development continues. </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Ime</th>
+                <th scope="col">Lokacija</th>
+                <th scope="col">Čas in datum</th>
+                <th scope="col">Število krogov</th>
+                <th scope="col">Track photo</th>
+                <th scope="col">Flag</th>
+                <th scope="col">Sezona</th>
+                <th scope="col">Edit</th>
+                
 
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $race_sql = "SELECT * FROM races;";
+            if($result = mysqli_query($conn,$race_sql)){
+                while($row = mysqli_fetch_assoc($result)){
+                    $season_sql = "SELECT name from season WHERE idseason = ". $row['season_idseason'].";";
+                    if($sesason_result = mysqli_query($conn, $sesason_result)){
+                        $season_name = mysqli_fetch_assoc($sesason_result)['name'];
+                        echo "<tr>";
+                        echo "<td>".row['idraces']."</td>";
+                        echo "<td>".row['name']."</td>";
+                        echo "<td>".row['location']."</td>";
+                        echo "<td>".row['date_time']."</td>";
+                        echo "<td>".row['number_laps']."</td>";
+                        echo "<td>".row['track_photo']."</td>";
+                        echo "<td>".row['flag']."</td>";
+                        echo "<td>".$season_name."</td>";
+                        echo "<td><a class='btn btn-primary' href='race.php?id=".row['idraces']."'>Link</a></td>";
+                        echo "</tr>";
+                    }
+                }
+            }
+            
+            
+            
+            ?>
 
-    </div>
-  </div>
+        </tbody>
+    </table>
 </div>
 
 
