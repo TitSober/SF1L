@@ -112,7 +112,7 @@ include('../backend/db_connect.php')
 
 <!-- Main body of page other is static -->
 <div class="container border bg-light"> 
-    <form enctype="multipart/form-data" action="../backend/add_teams_db.php" method="post">
+    <form enctype="multipart/form-data" action="../backend/add_races_db.php" method="post">
     <div class="container">
     <h4 class="text-secondary mt-2">Dodajanje dirk</h4>
         <div class="row mt-3">

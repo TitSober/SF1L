@@ -2,7 +2,7 @@
 include('db_connect.php');
 $files_names = ['front','zmagovalna','leva_profilna','desna_profilna','lower_third'];
 $files_uploaded = TRUE;
-for($i = 0; $i < count($filesnames);$i++){
+for($i = 0; $i < count($files_names);$i++){
     $errors= array();
     $file_name = str_replace(" ", "-",$_FILES[$files_names[$i]]['name']);
     $file_size =$_FILES[$files_names[$i]]['size'];
@@ -71,9 +71,9 @@ $lt = mysqli_real_escape_string($conn,str_replace(" ", "-",$_FILES['lower_third'
 if($files_uploaded){
       $result = mysqli_query($conn, "INSERT INTO driver(name, lastname, discord_username, platform, game_tag, steam_friend_code, driver_status, date_of_birth, equipment, driver_number, teams_idteams, front_photo,left_profile_photo, right_profile_photo, winner_photo, LT_photo,Gearbox,ABS, Traction_control, Racing_line) VALUES('$ime', '$priimek','$discord', '$platforma', '$tag', '$steam', '$status', '$datum', '$oprema',$stevilka,$ekipa,'$front', '$leva', '$desna', '$zmagovalna','$lt',$gb, $abs,$tr,$rl);");
    if($result){
-      header("Location: ../admin/add_players.php");
+      header("Location: ../admin/add_players.php?success=1");
    }else{
-      
+      header("Location: ../admin/add_players.php?success=0");
 
    }
 }
