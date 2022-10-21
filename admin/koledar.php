@@ -26,7 +26,7 @@ include('../backend/db_connect.php')
     
 
 
-    <title>Race management</title>
+    <title>F1 Dashboard</title>
 </head>
 <body>
 
@@ -70,7 +70,7 @@ include('../backend/db_connect.php')
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link active me-3" href="#">KOLEDAR</a>
+          <a class="nav-link active me-3" href="koledar.php">KOLEDAR</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active me-3" href="#">STATISTIKA</a>
@@ -108,68 +108,54 @@ include('../backend/db_connect.php')
 </nav>
 
 
-
 <!-- Main body of page other is static -->
-<div class="container">
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Ime</th>
-                <th scope="col">Lokacija</th>
-                <th scope="col">Čas in datum</th>
-                <th scope="col">Število krogov</th>
-                <th scope="col">Track photo</th>
-                <th scope="col">Flag</th>
-                <th scope="col">Sezona</th>
-                <th scope="col">Edit</th>
-                
-
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            function getSeasonFromRace($id,$conn){
-              $sql = "SELECT name from season WHERE idseason = $id;";
-              $result = mysqli_query($conn,$sql);
-              if($result){
-                while($row = mysqli_fetch_assoc($result)){
-                  return $row['name'];
-                }
-              }else{
-                return "No season";
-              }
-
-            }
-
-
-
-            $race_sql = "SELECT * FROM races;";
-            if($result = mysqli_query($conn,$race_sql)){
-                while($row = mysqli_fetch_assoc($result)){
-                    
-                    
+<div class="container container-sm">
+  <div class="row">
+    <div class="col">
+    <h1><?php 
+        $sezonaSql = "SELECT * from season order by name limit 1;";
+        $resultSezona = mysqli_query($conn,$sezonaSql);
+        $idSeason = 0;
+        if($resultSezona){
+            $result = mysqli_fetch_assoc($resultSezona);
+            $idSeason = $result['idseason'];
+            echo $result['name'];
+        }?></h1>
+    </div>
+  </div>
+        <div class="row">
+            <div class="col"><table class="table table-sm">
+            <thead>
+                <tr>
+                   
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $koledarSql = "SELECT * from races where season_idseason = $idSeason;";
+                $resultKoledar = mysqli_query($conn,$koledarSql);
+                if($resultKoledar){
+                    $count = 1;
+                    while($row = mysqli_fetch_assoc($resultKoledar)){
                         echo "<tr>";
-                        echo "<td>".$row['idraces']."</td>";
+                        echo "<td>$count</td>";
+                        echo "<td ><img class='img-fluid' src='../images/flag/".$row['flag']."' style='max-width:20%;'></td>";
                         echo "<td>".$row['name']."</td>";
-                        echo "<td>".$row['location']."</td>";
-                        echo "<td>".$row['date_time']."</td>";
-                        echo "<td>".$row['number_laps']."</td>";
-                        echo "<td><img class='img-fluid' src='../images/track/".$row['track_photo']."' style='max-width:30%;'></td>";
-                        echo "<td><img class='img-fluid' src='../images/flag/".$row['flag']."' style='max-width:20%;'></td>";
-                        echo "<td>".getSeasonFromRace($row['season_idseason'],$conn)."</td>";
-                        echo "<td><a class='btn btn-primary' href='race.php?id=".$row['idraces']."'>Link</a></td>";
-                        echo "</tr>";
-                    
+                        if($row['sprint_flag']){
+                            echo "<td>SPRINT</td>";
+                        }else{
+                            echo "<td></td>";
+                        }
+                        echo "<td>".$row['date_time']."<td>";
+                        echo"</tr>";
+                    }
                 }
-            }
-            
-            
-            
-            ?>
-
-        </tbody>
-    </table>
+                ?>
+            </tbody>
+        </table></div>
+            <div class="col"></div>
+        </div>
+        
 </div>
 
 

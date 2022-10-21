@@ -70,7 +70,7 @@ include('../backend/db_connect.php')
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link active me-3" href="#">KOLEDAR</a>
+          <a class="nav-link active me-3" href="koledar.php">KOLEDAR</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active me-3" href="#">STATISTIKA</a>

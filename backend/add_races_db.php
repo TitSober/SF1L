@@ -30,14 +30,26 @@ for($i = 0; $i < count($files_names);$i++){
     }
 }
 $ime = mysqli_real_escape_string($conn,$_POST['name']);
-$locaton = mysqli_real_escape_string($conn,$_POST['location']);
+$location = mysqli_real_escape_string($conn,$_POST['location']);
 $time = mysqli_real_escape_string($conn,$_POST['time']);
 $laps = mysqli_real_escape_string($conn,$_POST['laps']);
 $season = mysqli_real_escape_string($conn,$_POST['season']);
-$front = mysqli_real_escape_string($conn,str_replace(" ", "-",$_FILES[$files_names[0]]['name']));
-$zmagovalna = mysqli_real_escape_string($conn,str_replace(" ", "-",$_FILES[$files_names[1]]['name']));
+$track = mysqli_real_escape_string($conn,str_replace(" ", "-",$_FILES[$files_names[0]]['name']));
+$flag = mysqli_real_escape_string($conn,str_replace(" ", "-",$_FILES[$files_names[1]]['name']));
+if(isset($_POST['sprint'])){
+   $sprint = 1;
+}else{
+   $sprint = 0;
+}
 if($files_uploaded){
-    $result = mysqli_query($conn,"INSERT INTO races(name,location,date_time,number_laps,season_idseason) VALUES('$ime','$location','$time',$laps,$season,);")
+   $sql = "INSERT INTO races(name,location,date_time,number_laps,season_idseason,sprint_flag,track_photo,flag) VALUES('$ime','$location','$time',$laps,$season,$sprint,'$track','$flag');";
+   $result = mysqli_query($conn,$sql);
+   if($result){
+      header("Location: ../admin/add_races.php?success=1");
+   }else{
+      header("Location: ../admin/add_races.php?success=0");
+      //echo $sql;
+   }
 
 
 

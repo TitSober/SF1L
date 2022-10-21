@@ -132,6 +132,10 @@ include('../backend/db_connect.php')
             <div class="col"> <input type="number" name ="laps" class="form-control"> </div>
         </div>
         <div class="row mt-3">
+          <div class="col"><label for="sprint" class="form-label">Sprint race</label></div>
+          <div class="col"><input type="checkbox" name="sprint" class="form-check-input" value="1"></div>
+        </div>
+        <div class="row mt-3">
             <div class="col"> <label for="season" class="form-label">Sezona</label> </div>
             <div class="col"><select name="season" class="form-select"> <?php
                 $season_sql = "SELECT * from season;";
