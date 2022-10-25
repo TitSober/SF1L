@@ -139,7 +139,7 @@ include('../backend/db_connect.php')
                     while($row = mysqli_fetch_assoc($resultKoledar)){
                         echo "<tr>";
                         echo "<td>$count</td>";
-                        echo "<td ><img class='img-fluid' src='../images/flag/".$row['flag']."' style='max-width:20%;'></td>";
+                        echo "<td><img class='img-fluid' src='../images/flag/".$row['flag']."' style='max-width:20%;'></td>";
                         echo "<td>".$row['name']."</td>";
                         if($row['sprint_flag']){
                             echo "<td>SPRINT</td>";

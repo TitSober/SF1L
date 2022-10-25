@@ -26,7 +26,7 @@ include('../backend/db_connect.php')
     
 
 
-    <title>Race management</title>
+    <title>F1 Dashboard</title>
 </head>
 <body>
 
@@ -70,7 +70,7 @@ include('../backend/db_connect.php')
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link active me-3" href="#">KOLEDAR</a>
+          <a class="nav-link active me-3" href="koledar.php">KOLEDAR</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active me-3" href="#">STATISTIKA</a>
@@ -80,6 +80,7 @@ include('../backend/db_connect.php')
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a href="manage_races.php" class="dropdown-item">Urejanje dirk</a></li>
             <li><a class="dropdown-item" href="add_races.php">Dodajanje dirk</a></li>
+            <li><a class="dropdown-item" href="add_racer_race.php">Dodaj dirkač dirki</a></li>
             
           </ul>
         </li>
@@ -108,75 +109,59 @@ include('../backend/db_connect.php')
 </nav>
 
 
-
 <!-- Main body of page other is static -->
-<div class="container">
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Ime</th>
-                <th scope="col">Lokacija</th>
-                <th scope="col">Čas in datum</th>
-                <th scope="col">Število krogov</th>
-                <th scope="col"> </th>
-                <th scope="col">Track photo</th>
-                <th scope="col">Flag</th>
-                <th scope="col">Sezona</th>
-                <th scope="col">Edit</th>
-                
-
-            </tr>
-        </thead>
-        <tbody>
+<div class="container border bg-light pb-2">
+  <h1>Dodaj voznika dirki</h1>
+  
+  <form action="../backend/add_racer_race_db.php" method="post">
+    <div class="container mb-5 mt-3">
+        <div class="row">
+            <div class="col">Voznik</div>
+            <div class="col">
+                <select name="driver" class="form-select">
             <?php
-            function getSeasonFromRace($id,$conn){
-              $sql = "SELECT name from season WHERE idseason = $id;";
-              $result = mysqli_query($conn,$sql);
-              if($result){
-                while($row = mysqli_fetch_assoc($result)){
-                  return $row['name'];
+                $sqlDriver = "SELECT iddriver,name,lastname,discord_username from driver;";
+                $result = mysqli_query($conn, $sqlDriver);
+                if($result){
+                    while($row=mysqli_fetch_assoc($result)){
+                        echo "<option value='".$row['iddriver']."'>".$row['name']." ".$row['lastname']."</option>";
+
+                    }
                 }
-              }else{
-                return "No season";
-              }
-
-            }
-
-
-
-            $race_sql = "SELECT * FROM races;";
-            if($result = mysqli_query($conn,$race_sql)){
-                while($row = mysqli_fetch_assoc($result)){
-                    
-                    
-                        echo "<tr>";
-                        echo "<td>".$row['idraces']."</td>";
-                        echo "<td>".$row['name']."</td>";
-                        echo "<td>".$row['location']."</td>";
-                        echo "<td>".$row['date_time']."</td>";
-                        echo "<td>".$row['number_laps']."</td>";
-                        if($row['sprint_flag']){
-                          echo "<td>Sprint Image</td>";
-
-                        }else{
-                          echo "<td> </td>";
-                        }
-                        echo "<td><img class='img-fluid' src='../images/track/".$row['track_photo']."' style='max-width:30%;'></td>";
-                        echo "<td><img class='img-fluid' src='../images/flag/".$row['flag']."' style='max-width:20%;'></td>";
-                        echo "<td>".getSeasonFromRace($row['season_idseason'],$conn)."</td>";
-                        echo "<td><a class='btn btn-primary' href='race.php?id=".$row['idraces']."'>Link</a></td>";
-                        echo "</tr>";
-                    
-                }
-            }
-            
-            
             
             ?>
+            </select>
+            </div>
 
-        </tbody>
-    </table>
+        </div>
+        <div class="row">
+            <div class="col">Dirka</div>
+            <div class="col">
+                <select name="race" class="form-select">
+                    <?php
+                    $sqlRace = "SELECT idraces, name from races;";
+                    $resultRace = mysqli_query($conn,$sqlRace);
+                    if($resultRace){
+                        while($row=mysqli_fetch_assoc($resultRace)){
+                            echo "<option value='".$row['idraces']."'>".$row['name']."</option>";
+                        }
+                    }
+                    
+                    
+                    ?>
+
+
+                </select>
+
+            </div>
+        </div>
+        
+
+
+    </div>
+  </form>
+
+  
 </div>
 
 
